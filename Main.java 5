@@ -1,0 +1,45 @@
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("Alice", 20, "Computer Science");
+        student.displayInfo();
+    }
+}
+
+class Person {
+    private String name;          // Private: Not accessible directly in subclass
+    protected int age;            // Protected: Accessible in subclass
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getter for private field
+    public String getName() {
+        return name;
+    }
+
+    // Setter for private field (optional)
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class Student extends Person {
+    private String major;
+
+    public Student(String name, int age, String major) {
+        super(name, age);
+        this.major = major;
+    }
+
+    public void displayInfo() {
+        // Cannot access 'name' directly → it's private in superclass
+        // System.out.println("Name: " + name); // ❌ Compile error
+
+        // Must use getter method to access private field
+        System.out.println("Name: " + getName());     // ✅ Access via method
+        System.out.println("Age: " + age);            // ✅ Direct access (protected)
+        System.out.println("Major: " + major);
+    }
+}

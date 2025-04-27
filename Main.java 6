@@ -1,0 +1,78 @@
+public class Main {
+    public static void main(String[] args) {
+        Trapezoid trapezoid = new Trapezoid(10, 6, 5);
+        Parallelogram para = new Parallelogram(8, 4);
+        Rectangle rect = new Rectangle(7, 3);
+        Square square = new Square(5);
+
+        System.out.println("Trapezoid Area: " + trapezoid.area());
+        System.out.println("Parallelogram Area: " + para.area());
+        System.out.println("Rectangle Area: " + rect.area());
+        System.out.println("Square Area: " + square.area());
+    }
+}
+
+// Simple Point class (not used for actual geometry here, but defined for structure)
+class Point {
+    int x, y;
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+// Base class (no area calculation here)
+class Quadrilateral {
+    Point[] points = new Point[4];
+
+    public Quadrilateral(Point p1, Point p2, Point p3, Point p4) {
+        points[0] = p1; points[1] = p2; points[2] = p3; points[3] = p4;
+    }
+
+    // No area() method here, since it’s too general
+}
+
+// Subclass: Trapezoid
+class Trapezoid extends Quadrilateral {
+    private double base1, base2, height;
+
+    public Trapezoid(double base1, double base2, double height) {
+        super(null, null, null, null);
+        this.base1 = base1;
+        this.base2 = base2;
+        this.height = height;
+    }
+
+    public double area() {
+        return 0.5 * (base1 + base2) * height;
+    }
+}
+
+// Subclass: Parallelogram
+class Parallelogram extends Quadrilateral {
+    private double base, height;
+
+    public Parallelogram(double base, double height) {
+        super(null, null, null, null);
+        this.base = base;
+        this.height = height;
+    }
+
+    public double area() {
+        return base * height;
+    }
+}
+
+// Subclass: Rectangle
+class Rectangle extends Parallelogram {
+    public Rectangle(double length, double width) {
+        super(length, width);
+    }
+}
+
+// Subclass: Square
+class Square extends Rectangle {
+    public Square(double side) {
+        super(side, side);
+    }
+}

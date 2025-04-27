@@ -1,0 +1,51 @@
+public class Main {
+    public static void main(String[] args) {
+        HourlyEmployee emp1 = new HourlyEmployee("Alice", "Brown", "789", 20.0, 35);
+        HourlyEmployee emp2 = new HourlyEmployee("Bob", "Davis", "987", 15.0, 45);
+
+        System.out.println(emp1.getFullName() + " Earnings: $" + emp1.earnings());
+        System.out.println(emp2.getFullName() + " Earnings: $" + emp2.earnings());
+    }
+}
+
+// Base class
+class Employee {
+    private String firstName;
+    private String lastName;
+    private String ssn;
+
+    public Employee(String first, String last, String ssn) {
+        this.firstName = first;
+        this.lastName = last;
+        this.ssn = ssn;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public String getSSN() {
+        return ssn;
+    }
+}
+
+// Subclass with hourly wage and overtime
+class HourlyEmployee extends Employee {
+    private double wage;  // hourly wage
+    private double hours; // hours worked
+
+    public HourlyEmployee(String first, String last, String ssn, double wage, double hours) {
+        super(first, last, ssn);
+        if (wage < 0) throw new IllegalArgumentException("Wage must be >= 0");
+        if (hours < 0 || hours > 168) throw new IllegalArgumentException("Hours must be between 0 and 168");
+        this.wage = wage;
+        this.hours = hours;
+    }
+
+    public double earnings() {
+        if (hours <= 40)
+            return wage * hours;
+        else
+            return (40 * wage) + ((hours - 40) * wage * 1.5); // overtime
+    }
+}

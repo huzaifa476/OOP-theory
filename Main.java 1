@@ -1,0 +1,46 @@
+public class Main {
+    public static void main(String[] args) {
+        CommissionEmployee ce = new CommissionEmployee("Alice", "Smith", "123-45-6789", 5000, 0.10);
+        BasePlusCommissionEmployee bpce = new BasePlusCommissionEmployee(ce, 1000);
+
+        System.out.println(bpce);
+        System.out.println("Total Earnings: $" + bpce.earnings());
+    }
+}
+class CommissionEmployee {
+    private String firstName;
+    private String lastName;
+    private String ssn;
+    private double grossSales;
+    private double commissionRate;
+    public CommissionEmployee(String firstName, String lastName, String ssn,
+                              double grossSales, double commissionRate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ssn = ssn;
+        this.grossSales = grossSales;
+        this.commissionRate = commissionRate;
+    }
+    public double earnings() {
+        return grossSales * commissionRate;
+    }
+    public String toString() {
+        return String.format("%s %s\nSSN: %s\nGross Sales: %.2f\nCommission Rate: %.2f",
+                firstName, lastName, ssn, grossSales, commissionRate);
+    }
+}
+class BasePlusCommissionEmployee {
+    private CommissionEmployee employee;
+    private double baseSalary;
+
+    public BasePlusCommissionEmployee(CommissionEmployee employee, double baseSalary) {
+        this.employee = employee;
+        this.baseSalary = baseSalary;
+    }
+    public double earnings() {
+        return baseSalary + employee.earnings();
+    }
+    public String toString() {
+        return String.format("%s\nBase Salary: %.2f", employee.toString(), baseSalary);
+    }
+}

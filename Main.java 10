@@ -1,0 +1,56 @@
+public class Main {
+    public static void main(String[] args) {
+        Coordinate point2D = new Coordinate(3, 4);
+        System.out.println("2D Distance from origin: " + point2D.getDistance());
+
+        ExtendedCoordinate point3D = new ExtendedCoordinate(3, 4, 5);
+        System.out.println("3D Distance from origin: " + point3D.getDistance());
+
+        ExtendedCoordinate another3D = new ExtendedCoordinate(6, 8, 10);
+        System.out.println("Distance between 3D points: " + point3D.getDistanceBetween(another3D));
+    }
+}
+
+// Base class for 2D point
+class Coordinate {
+    protected double x, y;
+
+    public Coordinate(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double getDistance() {
+        return Math.sqrt(x * x + y * y);
+    }
+}
+
+// Subclass for 3D point
+class ExtendedCoordinate extends Coordinate {
+    private Double z; // Optional z-coordinate
+
+    public ExtendedCoordinate(double x, double y) {
+        super(x, y);
+        this.z = null;
+    }
+
+    public ExtendedCoordinate(double x, double y, double z) {
+        super(x, y);
+        this.z = z;
+    }
+
+    @Override
+    public double getDistance() {
+        if (z == null) {
+            return super.getDistance();
+        }
+        return Math.sqrt(x * x + y * y + z * z);
+    }
+
+    public double getDistanceBetween(ExtendedCoordinate other) {
+        double dx = other.x - this.x;
+        double dy = other.y - this.y;
+        double dz = (other.z != null ? other.z : 0) - (this.z != null ? this.z : 0);
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+}

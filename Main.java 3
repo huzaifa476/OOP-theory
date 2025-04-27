@@ -1,0 +1,84 @@
+public class Main {
+    public static void main(String[] args) {
+        Freshman freshman = new Freshman("Alice", "Computer Science");
+        MastersStudent masters = new MastersStudent("Bob", "AI & Data Science");
+
+        freshman.displayInfo();
+        freshman.attendOrientation();
+
+        masters.displayInfo();
+        masters.researchThesis();
+    }
+}
+
+class Student {
+    String name;
+    String major;
+
+    public Student(String name, String major) {
+        this.name = name;
+        this.major = major;
+    }
+
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Major: " + major);
+    }
+}
+
+class UndergraduateStudent extends Student {
+    public UndergraduateStudent(String name, String major) {
+        super(name, major);
+    }
+
+    public void attendOrientation() {
+        System.out.println(name + " is attending undergraduate orientation.");
+    }
+}
+
+class GraduateStudent extends Student {
+    public GraduateStudent(String name, String major) {
+        super(name, major);
+    }
+
+    public void researchThesis() {
+        System.out.println(name + " is researching thesis in " + major + ".");
+    }
+}
+
+// Subclasses of UndergraduateStudent
+class Freshman extends UndergraduateStudent {
+    public Freshman(String name, String major) {
+        super(name, major);
+    }
+}
+
+class Sophomore extends UndergraduateStudent {
+    public Sophomore(String name, String major) {
+        super(name, major);
+    }
+}
+
+class Junior extends UndergraduateStudent {
+    public Junior(String name, String major) {
+        super(name, major);
+    }
+}
+
+class Senior extends UndergraduateStudent {
+    public Senior(String name, String major) {
+        super(name, major);
+    }
+}
+
+// Subclasses of GraduateStudent
+class MastersStudent extends GraduateStudent {
+    public MastersStudent(String name, String major) {
+        super(name, major);
+    }
+}
+
+class DoctoralStudent extends GraduateStudent {
+    public DoctoralStudent(String name, String major) {
+        super(name, major);
+    }
+}
